@@ -9,10 +9,12 @@ const Intern = require("./lib/Intern");
 const teamMembers = [];
 
 const templateHtml = require("./src/script.js");
+const { Script } = require("vm");
+const mainHTML = require("./src/script.js");
 
 const DIST_DIR = path.resolve(__dirname, "dist");
 
-const outputPath = path.join(DIST_DIR, "teamProfile.html");
+const outputPath = path.join(DIST_DIR, "profile.html");
 
 function addMember() {
   inquirer
@@ -152,7 +154,7 @@ function createFile() {
   if (!fs.existsSync(DIST_DIR)) {
     fs.mkdirSync(DIST_DIR);
   } else {
-    fs.writeFileSync(outputPath, templateHtml(teamMembers), "utf-8");
+    fs.writeFileSync(outputPath, mainHTML(teamMembers), "utf-8");
     console.log("HTML file created in the dist folder");
   }
 }
